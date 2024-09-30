@@ -1,0 +1,39 @@
+<div class="p-4">
+  <h1>Welcome to {{ title }}!</h1>
+
+  <div class="d-flex flex-column gap-4">
+    
+    <user-component
+      class="border"
+      [title]="'computed variable'"
+      [user]="computedUser" />
+
+    <user-component 
+      class="border" 
+      [title]="'variable'" 
+      [user]="user" />
+
+    <ng-container *ngIf="user$ | async as notNullUser">
+      <user-component 
+        class="border" 
+        [title]="'rxjs'" 
+        [user]="notNullUser" />
+    </ng-container>
+
+    <user-component 
+      class="border" 
+      [title]="'signal'" 
+      [user]="userSig()" />
+
+    <user-component
+      class="border"
+      [title]="'computed signal'"
+      [user]="computedUserSig()" />
+      
+  </div>
+  <button type="button" class="btn btn-primary mt-4" (click)="onChangeFirstname()">
+    Change Firstname
+  </button>
+</div>
+
+<router-outlet />
